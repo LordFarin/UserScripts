@@ -95,6 +95,21 @@ if(typeof StackExchange === "undefined")
         'n': 'Not about Stack Exchange Network software',
         's': 'Specific to a single site',
     }, defaultQuickSubstitutions), 'https://chat.meta.stackexchange.com/rooms/89/tavern-on-the-meta'));
+    //Mathematics
+    configsForSites.push(new SiteConfig('Mathematics SE', /^math.stackexchange.com$/, {
+        1: 'Blatantly off-topic (flag dialog)', //In close-flag dialog, but not the close-vote dialog.
+        2: 'Belongs on another site',
+        3: 'custom',
+        5: 'Missing context',
+        6: 'Seeks advice',
+        8: 'Not about Stack Exchange Network software',
+        11: 'Specific to a single site',
+    }, Object.assign({
+        'c': 'Missing context',
+        'a': 'Seeks advice',
+        'n': 'Not about Stack Exchange Network software',
+        's': 'Specific to a single site',
+    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165'));
 
     //Default site configuration
     var currentSiteConfig = new SiteConfig('Default', /./, {
