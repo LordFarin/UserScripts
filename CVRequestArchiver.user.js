@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         CV Request Archiver
 // @namespace    https://github.com/SO-Close-Vote-Reviewers/
-// @version      3.1.0
+// @version      3.1.1
 // @description  Scans the chat transcript and checks all cv+delete+undelete+reopen+dupe requests and SD, FireAlarm, Queen, etc. reports for status, then moves the completed or expired ones.
 // @author       @TinyGiant @rene @Tunaki @Makyen
+// @contributor  @LordFarin
 // @updateURL    https://github.com/LordFarin/UserScripts/raw/master/CVRequestArchiver.user.js
 // @downloadURL  https://github.com/LordFarin/UserScripts/raw/master/CVRequestArchiver.user.js
 // @include      /https?:\/\/chat(\.meta)?\.stack(overflow|exchange).com\/(rooms|search|transcript|users)(\/|\?).*/
