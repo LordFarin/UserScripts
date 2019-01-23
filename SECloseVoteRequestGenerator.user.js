@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name           Stack Exchange CV Request Generator
 // @namespace      https://github.com/SO-Close-Vote-Reviewers/
-// @version        1.6.2
+// @version        1.7.0
 // @description    This script generates formatted close vote requests and sends them to a specified chat room.
 // @author         @TinyGiant
-// @contributor    @rene @Tunaki @Makyen @paulroub
+// @contributor    @rene @Tunaki @Makyen @paulroub @Lord_Farin
 // @include        /^https?:\/\/([^/.]+\.)*(stackexchange.com|stackoverflow.com|serverfault.com|superuser.com|askubuntu.com|stackapps.com|mathoverflow.net)\/(?:q(uestions)?\/\d+)/*
 // @exclude        *://chat.stackoverflow.com/*
 // @exclude        *://chat.stackexchange.com/*
@@ -105,7 +105,7 @@ if(typeof StackExchange === "undefined")
     }, Object.assign({
         'c': 'Missing context',
         'a': 'Seeks advice',
-    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165'));
+    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165/crude'));
 
     //Default site configuration
     var currentSiteConfig = new SiteConfig('Default', /./, {
@@ -443,7 +443,7 @@ if(typeof StackExchange === "undefined")
 
     var CVRGUI = {};
     CVRGUI.wrp    = $('<span class="cvrgui" />');
-    CVRGUI.button = $('<a href="javascript:void(0)" class="cv-button">' + (isclosed?'reopen-pls':'cv-pls') + '</a>');
+    CVRGUI.button = $('<a href="javascript:void(0)" class="cv-button">' + (isclosed?'delete-pls':'close-pls') + '</a>');
     CVRGUI.list   = $('<dl class="cv-list" />');
     CVRGUI.css    = $('<style>.post-menu > span > a{padding:0 3px 2px 3px;color:#888}.post-menu > span > a:hover{color:#444;text-decoration:none} .cvrgui { position:relative;display:inline-block } .cvrgui * { box-sizing: border-box } .cv-list { display: none; margin:0; z-index:1; position:absolute; white-space:nowrap; border:1px solid #ccc;border-radius:3px;background:#FFF;box-shadow:0px 5px 10px -5px rgb(0,0,0,0.5) } .cv-list dd, .cv-list dl { margin: 0; padding: 0; } .cv-list dl dd { padding: 0px; margin: 0; width: 100%; display: table } .cv-list dl label, .cv-list dl form { display: table-cell } .cv-list dl button { margin: 2.5px 0; } .cv-list dl label { width: 100%; padding: 0px; }  .cv-list * { vertical-align: middle; } .cv-list dd > div { padding: 0px 15px; padding-bottom: 15px; } .cv-list dd > div > form { white-space: nowrap } .cv-list dd > div > form > input { display: inline-block; vertical-align: middle } .cv-list dd > div > form > input[type="text"] { width: 300px; margin-right: 5px; } .cv-list hr { margin:0 15px; border: 0px; border-bottom: 1px solid #ccc; } .cv-list a { display: block; padding: 10px 15px;}  .cv-list label { display: inline-block; padding: 10px 15px;} .cv-list label:last-child { padding-left: 0; }</style>');
     CVRGUI.target = (function(){
@@ -467,7 +467,7 @@ if(typeof StackExchange === "undefined")
         $('input[type="text"]', CVRGUI.items.send).focus();
     }
     CVRGUI.items  = {
-        send:    $('<dd><a href="javascript:void(0)">Send request</a><div style="display:none"><form><input type="text" placeholder="Close reason"/><input type="submit" value="Send"></form></div><hr></dd>'),
+        send:    $('<dd><a href="javascript:void(0)">Send request</a><div style="display:none"><form><input type="text" placeholder="Reason"/><input type="submit" value="Send"></form></div><hr></dd>'),
         room:    (function(){
             var item = $('<dd></dd>');
             var list = $('<dl>');
@@ -508,8 +508,8 @@ if(typeof StackExchange === "undefined")
                 CVRGUI.roomList = list;
             });
             return item;
-        })(),
-        update:  $('<dd><a href="javascript:void(0)">Check for updates</a>   </dd>')
+        })() //,
+        //update:  $('<dd><a href="javascript:void(0)">Check for updates</a>   </dd>')
     };
     for(var item in CVRGUI.items) {
         CVRGUI.list.append(CVRGUI.items[item]);
@@ -566,9 +566,9 @@ if(typeof StackExchange === "undefined")
         if($('#question .owner:not(#popup-close-question .owner) a').length) user = createMarkdownLinkWithText(user, base + $('#question .owner:not(#popup-close-question .owner) a').attr('href'));
         var time = $('#question .owner:not(#popup-close-question .owner) .relativetime');
         time = time.length ? ' ' + time.attr('title') : '';
-        var tag = $('#question a.post-tag').first().text(); //huh, sponsored tags have images =/ and off-topic tag like C++ are URL encoded -> get the text only
+        //var tag = $('#question a.post-tag').first().text(); //huh, sponsored tags have images =/ and off-topic tag like C++ are URL encoded -> get the text only
 		// for duplicate cv-pls, when the dupe is selected, the mini-review messes up the selector for username and date: it is removed with :not
-        var request = '[tag:'+ (isclosed?'reopen-pls':'cv-pls') +'] [tag:' + tag + '] ' + reason + ' ' + title + ' - ' + user + time;
+        var request = '[tag:'+ (isclosed?'delete':'close') +']' + ' ' + title + ' - ' + user + time + ' (Reason: ' + reason + ')';
         if(alreadyPostedRequest && !window.confirm('You\'ve already sent a request about this question. Do you want to send another?')) {
             return;
         } // else
@@ -600,7 +600,7 @@ if(typeof StackExchange === "undefined")
         }
     });
     setTimeout(checkUpdates);
-    $('.close-question-link').click(function(){
+    /*$('.close-question-link').click(function(){
         var cpcheck = setInterval(function(){
             var popup = $('#popup-close-question'), selected, discard;
             if(!popup.length) return;
@@ -660,5 +660,5 @@ if(typeof StackExchange === "undefined")
                 discard= checkbox.find('input').is(':checked') && $('form', CVRGUI.items.send).submit();
             });
         }, 100);
-    });
+    });*/
 })();
