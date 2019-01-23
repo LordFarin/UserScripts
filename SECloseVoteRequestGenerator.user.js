@@ -5,7 +5,7 @@
 // @description    This script generates formatted close vote requests and sends them to a specified chat room.
 // @author         @TinyGiant
 // @contributor    @rene @Tunaki @Makyen @paulroub
-// @include        /^https?:\/\/([^/.]+\.)*(stackexchange.com|stackoverflow.com|serverfault.com|superuser.com|askubuntu.com|stackapps.com|mathoverflow.net)\/(?:q(uestions)?\/\d+)/
+// @include        /^https?:\/\/([^/.]+\.)*(stackexchange.com|stackoverflow.com|serverfault.com|superuser.com|askubuntu.com|stackapps.com|mathoverflow.net)\/(?:q(uestions)?\/\d+)/*
 // @exclude        *://chat.stackoverflow.com/*
 // @exclude        *://chat.stackexchange.com/*
 // @exclude        *://chat.*.stackexchange.com/*
