@@ -109,7 +109,7 @@ if(typeof StackExchange === "undefined")
         'a': 'Seeks advice',
         'n': 'Not about Stack Exchange Network software',
         's': 'Specific to a single site',
-    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165'));
+    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165/crude'));
 
     //Default site configuration
     var currentSiteConfig = new SiteConfig('Default', /./, {
