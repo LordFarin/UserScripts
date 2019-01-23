@@ -100,16 +100,12 @@ if(typeof StackExchange === "undefined")
         1: 'Blatantly off-topic (flag dialog)', //In close-flag dialog, but not the close-vote dialog.
         2: 'Belongs on another site',
         3: 'custom',
-        5: 'Missing context',
-        6: 'Seeks advice',
-        8: 'Not about Stack Exchange Network software',
-        11: 'Specific to a single site',
+        17: 'Missing context',
+        18: 'Seeks advice',
     }, Object.assign({
         'c': 'Missing context',
         'a': 'Seeks advice',
-        'n': 'Not about Stack Exchange Network software',
-        's': 'Specific to a single site',
-    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165/crude'));
+    }, defaultQuickSubstitutions), 'https://chat.stackexchange.com/rooms/2165'));
 
     //Default site configuration
     var currentSiteConfig = new SiteConfig('Default', /./, {
