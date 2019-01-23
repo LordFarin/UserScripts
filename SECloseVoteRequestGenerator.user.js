@@ -5,6 +5,8 @@
 // @description    This script generates formatted close vote requests and sends them to a specified chat room.
 // @author         @TinyGiant
 // @contributor    @rene @Tunaki @Makyen @paulroub @Lord_Farin
+// @updateURL      https://github.com/LordFarin/UserScripts/raw/master/SECloseVoteRequestGenerator.user.js
+// @downloadURL    https://github.com/LordFarin/UserScripts/raw/master/SECloseVoteRequestGenerator.user.js
 // @include        /^https?:\/\/([^/.]+\.)*(stackexchange.com|stackoverflow.com|serverfault.com|superuser.com|askubuntu.com|stackapps.com|mathoverflow.net)\/(?:q(uestions)?\/\d+)/*
 // @exclude        *://chat.stackoverflow.com/*
 // @exclude        *://chat.stackexchange.com/*
