@@ -467,7 +467,7 @@ if(typeof StackExchange === "undefined")
         $('input[type="text"]', CVRGUI.items.send).focus();
     }
     CVRGUI.items  = {
-        send:    $('<dd><a href="javascript:void(0)">Send request</a><div style="display:none"><form><input type="text" placeholder="Reason"/><input type="submit" value="Send"></form></div><hr></dd>'),
+        send:    $('<dd><form><input type="submit" value="Send request"></form><hr></dd>'),
         room:    (function(){
             var item = $('<dd></dd>');
             var list = $('<dl>');
@@ -558,9 +558,9 @@ if(typeof StackExchange === "undefined")
 
     $('form', CVRGUI.items.send).on('submit',function(e){
         e.preventDefault();
-        var reason = $('input[type="text"]', CVRGUI.items.send).val();
-        if(!reason) return false;
-        reason = reasons.get(reason);
+        //var reason = $('input[type="text"]', CVRGUI.items.send).val();
+        //if(!reason) return false;
+        //reason = reasons.get(reason);
         var title = createMarkdownLinkWithText($('#question-header h1 a').text().replace(/^\s+|\s+$/gm, ''), base + $('#question .short-link').attr('href').replace(/(\/\d+)\/\d+$/, '$1'));
         var user = $('.post-signature.owner:not([align="right"],#popup-close-question .post-signature) .user-details > *:not(.d-none):not(.-flair)').text().trim().match(/[^\n]+/)[0].trim();
         if($('#question .owner:not(#popup-close-question .owner) a').length) user = createMarkdownLinkWithText(user, base + $('#question .owner:not(#popup-close-question .owner) a').attr('href'));
@@ -568,7 +568,7 @@ if(typeof StackExchange === "undefined")
         time = time.length ? ' ' + time.attr('title') : '';
         //var tag = $('#question a.post-tag').first().text(); //huh, sponsored tags have images =/ and off-topic tag like C++ are URL encoded -> get the text only
 		// for duplicate cv-pls, when the dupe is selected, the mini-review messes up the selector for username and date: it is removed with :not
-        var request = '[tag:'+ (isclosed?'delete':'close') +']' + ' ' + title + ' - ' + user + time + ' (Reason: ' + reason + ')';
+        var request = '[meta-tag:'+ (isclosed?'delete':'close') +']' + ' ' + title + ' by ' + user ;//+ ' (Reason: ' + reason + ')';
         if(alreadyPostedRequest && !window.confirm('You\'ve already sent a request about this question. Do you want to send another?')) {
             return;
         } // else
