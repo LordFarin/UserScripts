@@ -4,8 +4,8 @@
 // @version      3.1.0
 // @description  Scans the chat transcript and checks all cv+delete+undelete+reopen+dupe requests and SD, FireAlarm, Queen, etc. reports for status, then moves the completed or expired ones.
 // @author       @TinyGiant @rene @Tunaki @Makyen
-// @updateURL    https://github.com/SO-Close-Vote-Reviewers/UserScripts/raw/master/CVRequestArchiver.user.js
-// @downloadURL  https://github.com/SO-Close-Vote-Reviewers/UserScripts/raw/master/CVRequestArchiver.user.js
+// @updateURL    https://github.com/LordFarin/UserScripts/raw/master/CVRequestArchiver.user.js
+// @downloadURL  https://github.com/LordFarin/UserScripts/raw/master/CVRequestArchiver.user.js
 // @include      /https?:\/\/chat(\.meta)?\.stack(overflow|exchange).com\/(rooms|search|transcript|users)(\/|\?).*/
 // @grant        none
 // ==/UserScript==
@@ -133,12 +133,12 @@
         //  are part of the functionality that's currently only enabled on chat.SO. When that is re-written to be usable on other
         //  sites, or when these are used in some other manner, this will need to be expanded.
         const knownUserIds = {
-            fireAlarm: 6373379,
+            //fireAlarm: 6373379,
             smokeDetector: 3735529,
-            queen: 6294609,
-            fox9000: 3671802,
-            yam: 5285668,
-            panta: 1413395,
+            //queen: 6294609,
+            //fox9000: 3671802,
+            //yam: 5285668,
+            //panta: 1413395,
         };
         const parser = new DOMParser();
 
@@ -206,6 +206,18 @@
                     new TargetRoom(68414, soChat, 'SOCVR Testing Facility', 'Testing', 'Te', 'Test', commonRoomOptions.allTrue),
                     //Private for SD posts that have especially offensive content.
                     new TargetRoom(170175, soChat, 'Private Trash', 'Private', 'P', 'Private', commonRoomOptions.noUI),
+                ]),
+            },
+            {//CRUDE
+                name: 'CRUDE',
+                primeRoom: 2165,
+                server: seChat,
+                defaultTargetRoom: 88696,
+                rooms: makeRoomsByNumberObject([
+                    //SOCVR
+                    new TargetRoom(2165, seChat, 'CRUDE', 'CRUDE', 'C', 'CRUDE', commonRoomOptions.allTrue),
+                    //Graveyard
+                    new TargetRoom(88696, seChat, 'CRUDE Archive', 'Archive', 'A', 'Archive', commonRoomOptions.allTrue),
                 ]),
             },
             {//SOBotics
